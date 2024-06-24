@@ -1,5 +1,12 @@
 import * as crypto from 'crypto';
 
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]): string {
+  return twMerge(clsx(inputs));
+}
+
 export const shortenHash = (hash: string, length = 4 as number) => {
   if (hash) {
     return (

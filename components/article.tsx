@@ -11,7 +11,7 @@ interface Props {
   event: Event;
 }
 
-export default function Article({ event }: Props) {
+export function Article({ event }: Props) {
   const { relayUrl } = useRelayStore();
   const { setCachedArticleEvent } = useArticleEventStore();
 
