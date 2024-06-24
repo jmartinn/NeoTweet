@@ -18,8 +18,11 @@ import { getTagValues } from '@/lib/utils';
 export default function Home() {
   const { setRelayMenuIsOpen } = useRelayMenuStore();
 
-  const { articleEvents, getArticleEvents, setArticleEvents } =
-    useArticleEventStore();
+  const {
+    getEvents: getArticleEvents,
+    setEvents: setArticleEvents,
+    events: articleEvents,
+  } = useArticleEventStore();
 
   const { subscribe, relayUrl } = useRelayStore();
   const { setProfile } = useProfileStore();

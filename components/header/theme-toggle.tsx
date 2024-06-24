@@ -2,42 +2,39 @@
 
 import { useState } from 'react';
 
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
-
 import { Theme } from '@/app/types';
+import { Icons } from '@/components/icons';
 
-interface Props {
+interface ThemeToggleProps {
   theme: Theme;
 }
 
-export default function ThemeToggle({ theme }: Props) {
+export default function ThemeToggle({ theme }: ThemeToggleProps) {
   const [_theme, setTheme] = useState<Theme>(theme);
 
   const toggleTheme = () => {
     const root = document.getElementsByTagName('html')[0];
-    root.classList.toggle(Theme.dark);
-    if (root.classList.contains(Theme.dark)) {
-      setTheme(Theme.dark);
-      document.cookie = `theme=${Theme.dark};SameSite=Lax`;
+    root.classList.toggle(Theme.Dark);
+    if (root.classList.contains(Theme.Dark)) {
+      setTheme(Theme.Dark);
+      document.cookie = `theme=${Theme.Dark};SameSite=Lax`;
     } else {
-      setTheme(Theme.light);
-      document.cookie = `theme=${Theme.light};SameSite=Lax`;
+      setTheme(Theme.Light);
+      document.cookie = `theme=${Theme.Light};SameSite=Lax`;
     }
   };
 
   return (
-    <>
-      <button onClick={toggleTheme}>
-        {_theme === Theme.light ? (
-          <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/10 ring-1 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:ring-white/10 dark:hover:bg-zinc-800/90">
-            <SunIcon className="size-6 stroke-teal-400" />
-          </div>
-        ) : (
-          <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/10 ring-1 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:ring-white/10 dark:hover:bg-zinc-800/90">
-            <MoonIcon className="size-6 stroke-purple-500" />
-          </div>
-        )}
-      </button>
-    </>
+    <button type="button" onClick={toggleTheme}>
+      {_theme === Theme.Light ? (
+        <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/10 ring-1 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:ring-white/10 dark:hover:bg-zinc-800/90">
+          <Icons.Sun className="size-6 stroke-teal-400" />
+        </div>
+      ) : (
+        <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/10 ring-1 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:ring-white/10 dark:hover:bg-zinc-800/90">
+          <Icons.Moon className="size-6 stroke-purple-500" />
+        </div>
+      )}
+    </button>
   );
 }

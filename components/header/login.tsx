@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 
 import { useUserProfileStore } from '@/app/stores/user-profile-store';
-import UserProfile from '@/components/profile/user-profile';
 
-export default function Login({ children }: any) {
+import UserProfile from '../profile/user-profile';
+
+export default function Login({ children }: { children: React.ReactNode }) {
   const { userPublicKey, setUserPublicKey } = useUserProfileStore();
-  // https://github.com/vercel/next.js/discussions/17443
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -15,8 +15,8 @@ export default function Login({ children }: any) {
   }, []);
 
   const loginHandler = async () => {
-    if (typeof nostr !== 'undefined') {
-      const publicKey: string = await nostr.getPublicKey();
+    if (typeof window.nostr !== 'undefined') {
+      const publicKey: string = await window.nostr.getPublicKey();
       setUserPublicKey(publicKey);
     }
   };
@@ -25,7 +25,9 @@ export default function Login({ children }: any) {
     mounted && (
       <div>
         {userPublicKey === '' ? (
-          <button onClick={loginHandler}>{children}</button>
+          <button type="button" onClick={loginHandler}>
+            {children}
+          </button>
         ) : (
           <UserProfile />
         )}

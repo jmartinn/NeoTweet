@@ -1,6 +1,6 @@
 export enum Theme {
-  dark = 'dark',
-  light = 'light',
+  Dark = 'dark',
+  Light = 'light',
 }
 
 export type EventProfileContent = {
