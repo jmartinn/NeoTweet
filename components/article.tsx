@@ -51,7 +51,7 @@ export function Article({ event }: ArticleProps): JSX.Element {
         </Avatar>
 
         <span className="flex items-center" aria-hidden="true">
-          <span className="bg-muted-foreground h-5 w-0.5 rounded-full" />
+          <span className="bg-muted-foreground h-9 w-0.5 rounded-full" />
         </span>
 
         <time className="text-muted-foreground z-10 flex items-center text-sm">
@@ -79,17 +79,19 @@ export function Article({ event }: ArticleProps): JSX.Element {
       </Badge>
       <div
         aria-hidden="true"
-        className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
+        className="group relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500 transition-all duration-300 group-hover:text-teal-400"
       >
-        Read article
-        <Icons.ChevronRight className="ml-1 size-4 text-teal-500" />
+        <span>Read article</span>
+        <span className='transition-transform duration-300 group-hover:translate-x-1'>
+          <Icons.ChevronRight className="ml-1 size-4" />
+        </span>
       </div>
-      <div className="text-muted-foreground relative z-10 mt-4 flex items-center gap-x-4 text-sm">
-        <div className="flex items-center gap-x-1">
+      <div className="text-muted-foreground relative z-20 mt-4 flex items-center gap-x-4 text-sm">
+        <div className="flex items-center gap-x-1 hover:text-red-500">
           <Icons.Heart className="size-5 cursor-pointer" />
           <span>418</span>
         </div>
-        <div className="flex items-center gap-x-1">
+        <div className="flex items-center gap-x-1 hover:text-blue-500">
           <Icons.Comment className="size-5 cursor-pointer" />
           <span>53</span>
         </div>

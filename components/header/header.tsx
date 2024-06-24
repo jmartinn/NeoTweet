@@ -28,12 +28,13 @@ export default function Header() {
             </div>
             <NavBar />
             <div className="flex items-center justify-end gap-x-4 md:flex-1">
-              <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:ring-white/10 dark:hover:bg-zinc-800/90">
+              {/* Search */}
+              <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/5 ring-2 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:shadow-zinc-500/10 dark:ring-white/10 dark:hover:bg-zinc-800/90">
                 <Icons.Magnifier className="size-6 stroke-zinc-500 dark:stroke-zinc-500" />
               </div>
               <ThemeToggle theme={theme} />
               <Login>
-                <div className="flex flex-1 justify-end">
+                <div className="ml-6 flex flex-1 justify-end">
                   <a
                     href="/login"
                     className="group flex items-center space-x-1 text-sm font-semibold leading-6 text-purple-500 transition-all duration-300 hover:text-purple-700 dark:text-teal-400 dark:hover:text-teal-500"
