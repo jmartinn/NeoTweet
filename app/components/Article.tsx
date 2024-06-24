@@ -1,10 +1,11 @@
-import { nip19, type Event } from "nostr-tools";
-import { useRelayStore } from "../stores/relayStore";
-import { useArticleEventStore } from "../stores/eventStore";
-import { useRouter } from "next/navigation";
-import { getTagValues } from "../lib/utils";
-import { AddressPointer } from "nostr-tools/lib/nip19";
-import { useProfileStore } from "../stores/profileStore";
+import { useRouter } from 'next/navigation';
+import { nip19, type Event } from 'nostr-tools';
+import type { AddressPointer } from 'nostr-tools/nip19';
+
+import { getTagValues } from '../lib/utils';
+import { useArticleEventStore } from '../stores/eventStore';
+import { useProfileStore } from '../stores/profileStore';
+import { useRelayStore } from '../stores/relayStore';
 
 interface Props {
   event: Event;
@@ -19,7 +20,7 @@ export default function Article({ event }: Props) {
   const router = useRouter();
 
   const routeArticle = () => {
-    const identifier = getTagValues("d", event.tags);
+    const identifier = getTagValues('d', event.tags);
 
     // TODO: handle relays
     // TODO: add tag for applicacants
@@ -37,27 +38,24 @@ export default function Article({ event }: Props) {
   return (
     <article
       onClick={routeArticle}
-      className="group relative flex flex-col items-start cursor-pointer"
+      className="group relative flex cursor-pointer flex-col items-start"
     >
-      <div className="flex z-10 items-center gap-x-4 pb-2">
+      <div className="z-10 flex items-center gap-x-4 pb-2">
         <img
           src={getProfile(relayUrl, event.pubkey)?.picture}
           alt=""
-          className="h-5 w-5 rounded-full bg-gray-800"
+          className="size-5 rounded-full bg-gray-800"
         />
 
-        <span
-          className="flex items-center"
-          aria-hidden="true"
-        >
+        <span className="flex items-center" aria-hidden="true">
           <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
         </span>
 
         <time className="z-10 flex items-center text-sm text-zinc-400 dark:text-zinc-500">
-          {new Date(event.created_at * 1000).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
+          {new Date(event.created_at * 1000).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
           })}
         </time>
       </div>
@@ -65,13 +63,13 @@ export default function Article({ event }: Props) {
       <h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
         <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
         <span className="relative z-10">
-          {getTagValues("title", event.tags)}
+          {getTagValues('title', event.tags)}
         </span>
-        <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl"></div>
+        <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-zinc-800/50"></div>
       </h2>
 
       <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        {getTagValues("summary", event.tags)}
+        {getTagValues('summary', event.tags)}
       </p>
       <div
         aria-hidden="true"
@@ -82,7 +80,7 @@ export default function Article({ event }: Props) {
           viewBox="0 0 16 16"
           fill="none"
           aria-hidden="true"
-          className="ml-1 h-4 w-4 stroke-current"
+          className="ml-1 size-4 stroke-current"
         >
           <path
             d="M6.75 5.75 9.25 8l-2.5 2.25"

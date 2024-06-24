@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Theme } from "../../types";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+
+import { Theme } from '../../types';
 
 interface Props {
   theme: Theme;
@@ -13,7 +14,7 @@ export default function ThemeToggle({ theme }: Props) {
   const [_theme, setTheme] = useState<Theme>(theme);
 
   const toggleTheme = () => {
-    const root = document.getElementsByTagName("html")[0];
+    const root = document.getElementsByTagName('html')[0];
     root.classList.toggle(Theme.dark);
     if (root.classList.contains(Theme.dark)) {
       setTheme(Theme.dark);
@@ -26,16 +27,14 @@ export default function ThemeToggle({ theme }: Props) {
 
   return (
     <>
-      <button
-        onClick={toggleTheme}
-      >
+      <button onClick={toggleTheme}>
         {_theme === Theme.light ? (
-          <div className="cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800/90 p-2 rounded-full shadow-lg backdrop-blur shadow-zinc-800/10 ring-1 ring-zinc-900/10 dark:ring-white/10">
-            <SunIcon className="h-6 w-6 stroke-teal-400" />
+          <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/10 ring-1 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:ring-white/10 dark:hover:bg-zinc-800/90">
+            <SunIcon className="size-6 stroke-teal-400" />
           </div>
         ) : (
-          <div className="cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800/90 p-2 rounded-full shadow-lg backdrop-blur shadow-zinc-800/10 ring-1 ring-zinc-900/10 dark:ring-white/10">
-            <MoonIcon className="h-6 w-6 stroke-purple-500" />
+          <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/10 ring-1 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:ring-white/10 dark:hover:bg-zinc-800/90">
+            <MoonIcon className="size-6 stroke-purple-500" />
           </div>
         )}
       </button>

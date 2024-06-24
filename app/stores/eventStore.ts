@@ -1,6 +1,6 @@
-import type { Event } from "nostr-tools";
-import { create } from "zustand";
-import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import type { Event } from 'nostr-tools';
+import { create } from 'zustand';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
 interface ArticleEventState {
   articleEvents: Record<string, Array<Event>>;
@@ -27,7 +27,8 @@ export const useArticleEventStore = create<ArticleEventState>()(
           set((prev) => ({
             articleEvents: { ...prev.articleEvents, [relayUrl]: articleEvents },
           })),
-        getArticleEvents: (relayUrl: string) => get().articleEvents[relayUrl] ?? [],
+        getArticleEvents: (relayUrl: string) =>
+          get().articleEvents[relayUrl] ?? [],
         cachedArticleEvent: null,
         setCachedArticleEvent: (article) =>
           set({ cachedArticleEvent: article }),
@@ -44,7 +45,7 @@ export const useArticleEventStore = create<ArticleEventState>()(
         getCachedNoteEvent: () => get().cachedNoteEvent,
       }),
       {
-        name: "nostrnotes-article-event-storage",
+        name: 'nostrnotes-article-event-storage',
         storage: createJSONStorage(() => sessionStorage),
       },
     ),

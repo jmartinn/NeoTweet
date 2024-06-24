@@ -1,7 +1,8 @@
-import { RELAYS } from "@/app/lib/constants";
-import { relayInit } from "nostr-tools";
-import type { Event, Relay } from "nostr-tools";
-import { create } from "zustand";
+import { relayInit } from 'nostr-tools';
+import type { Event, Relay } from 'nostr-tools';
+import { create } from 'zustand';
+
+import { RELAYS } from '@/app/lib/constants';
 
 export interface RelaysState {
   allRelays: string[];
@@ -14,7 +15,12 @@ export interface RelaysState {
   connectedRelays: Set<Relay>;
   setConnectedRelays: (relays: Set<Relay>) => void;
   publish: (relays: string[], event: Event) => void;
-  subscribe: (relays: string[], filter: any, onEvent: (event: Event) => void, onEOSE: () => void) => void;
+  subscribe: (
+    relays: string[],
+    filter: any,
+    onEvent: (event: Event) => void,
+    onEOSE: () => void,
+  ) => void;
 }
 
 export const useRelayStore = create<RelaysState>((set) => ({
@@ -43,26 +49,30 @@ export const useRelayStore = create<RelaysState>((set) => ({
     let existingRelay: Relay | undefined;
     const connectedRelays = useRelayStore.getState().connectedRelays;
     if (connectedRelays.size > 0) {
-      existingRelay = Array.from(connectedRelays).find((r) => r.url === newRelayUrl);
+      existingRelay = Array.from(connectedRelays).find(
+        (r) => r.url === newRelayUrl,
+      );
     }
 
     if (existingRelay) {
-      console.log("info", `✅ nostr (${newRelayUrl}): Already connected!`);
+      console.log('info', `✅ nostr (${newRelayUrl}): Already connected!`);
       relay = existingRelay;
       useRelayStore.setState({ activeRelay: relay });
     } else {
-      console.log("NEWING UP A RELAY");
+      console.log('NEWING UP A RELAY');
       relay = relayInit(newRelayUrl);
 
       await relay.connect();
 
-      relay.on("connect", () => {
-        console.log("info", `✅ nostr (${newRelayUrl}): Connected!`);
+      relay.on('connect', () => {
+        console.log('info', `✅ nostr (${newRelayUrl}): Connected!`);
         const relayUrl = useRelayStore.getState().relayUrl;
         if (relayUrl === relay.url) {
           useRelayStore.setState({ activeRelay: relay });
           const connectedRelays = useRelayStore.getState().connectedRelays;
-          const isRelayInSet = Array.from(connectedRelays).some((r) => r.url === relay.url);
+          const isRelayInSet = Array.from(connectedRelays).some(
+            (r) => r.url === relay.url,
+          );
 
           if (!isRelayInSet) {
             set((state) => ({
@@ -73,15 +83,17 @@ export const useRelayStore = create<RelaysState>((set) => ({
         }
       });
 
-      relay.on("disconnect", () => {
-        console.log("warn", `🚪 nostr (${newRelayUrl}): Connection closed.`);
+      relay.on('disconnect', () => {
+        console.log('warn', `🚪 nostr (${newRelayUrl}): Connection closed.`);
         set({
-          connectedRelays: new Set([...connectedRelays].filter((r) => r.url !== relay.url)),
+          connectedRelays: new Set(
+            [...connectedRelays].filter((r) => r.url !== relay.url),
+          ),
         });
       });
 
-      relay.on("error", () => {
-        console.log("error", `❌ nostr (${newRelayUrl}): Connection error!`);
+      relay.on('error', () => {
+        console.log('error', `❌ nostr (${newRelayUrl}): Connection error!`);
       });
     }
 
@@ -93,7 +105,7 @@ export const useRelayStore = create<RelaysState>((set) => ({
   setConnectedRelays: (relays) => set({ connectedRelays: relays }),
 
   publish: async (relays: string[], event: any) => {
-    console.log("publishing to relays:", relays);
+    console.log('publishing to relays:', relays);
     for (const url of relays) {
       const relay = await useRelayStore.getState().connect(url);
 
@@ -106,12 +118,17 @@ export const useRelayStore = create<RelaysState>((set) => ({
       });
 
       if (publishedEvent) {
-        console.log("info", `✅ nostr (${url}): Published event!`);
+        console.log('info', `✅ nostr (${url}): Published event!`);
       }
     }
   },
 
-  subscribe: async (relays: string[], filter: any, onEvent: (event: Event) => void, onEOSE: () => void) => {
+  subscribe: async (
+    relays: string[],
+    filter: any,
+    onEvent: (event: Event) => void,
+    onEOSE: () => void,
+  ) => {
     for (const url of relays) {
       const relay = await useRelayStore.getState().connect(url);
 
@@ -119,11 +136,11 @@ export const useRelayStore = create<RelaysState>((set) => ({
 
       let sub = relay.sub([filter]);
 
-      sub.on("event", (event: any) => {
+      sub.on('event', (event: any) => {
         onEvent(event);
       });
 
-      sub.on("eose", () => {
+      sub.on('eose', () => {
         sub.unsub();
         onEOSE();
       });

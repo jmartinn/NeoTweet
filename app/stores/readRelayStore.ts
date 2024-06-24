@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
 type Relay = {
   url: string;
@@ -22,11 +22,11 @@ export const useReadRelayStore = create<RelayState>()(
         // TODO: populate this on login
         // TODO: make sure the active relay matches
         readRelays: [
-          { url: "wss://relay.damus.io", isActive: true },
-          { url: "wss://nos.lol", isActive: false },
-          { url: "wss://relay.snort.social", isActive: false },
-          { url: "wss://nostr-pub.wellorder.net", isActive: false },
-          { url: "wss://nostr.wine/", isActive: false },
+          { url: 'wss://relay.damus.io', isActive: true },
+          { url: 'wss://nos.lol', isActive: false },
+          { url: 'wss://relay.snort.social', isActive: false },
+          { url: 'wss://nostr-pub.wellorder.net', isActive: false },
+          { url: 'wss://nostr.wine/', isActive: false },
         ],
         addReadRelay: (url, isActive) =>
           set((state) => ({
@@ -60,7 +60,7 @@ export const useReadRelayStore = create<RelayState>()(
           }),
       }),
       {
-        name: "neotweet-relay-store",
+        name: 'neotweet-relay-store',
         storage: createJSONStorage(() => sessionStorage),
       },
     ),

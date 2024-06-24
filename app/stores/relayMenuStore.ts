@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
-import type { RelayMenuActiveTab } from "../types";
+import type { RelayMenuActiveTab } from '../types';
 
 interface RelayMenuState {
   RelayMenuTabs: RelayMenuActiveTab[];
@@ -13,8 +13,8 @@ interface RelayMenuState {
 
 export const useRelayMenuStore = create<RelayMenuState>()(
   devtools((set) => ({
-    RelayMenuTabs: ["Read From", "Post To", "Settings", "Discover"],
-    relayMenuActiveTab: "Read From",
+    RelayMenuTabs: ['Read From', 'Post To', 'Settings', 'Discover'],
+    relayMenuActiveTab: 'Read From',
     relayMenuIsOpen: false,
     setRelayMenuActiveTab: (value: RelayMenuActiveTab) =>
       set({ relayMenuActiveTab: value }),

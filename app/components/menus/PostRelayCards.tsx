@@ -1,7 +1,7 @@
-import { usePostRelayStore } from "@/app/stores/postRelayStore";
-import { useRelayInfoStore } from "@/app/stores/relayInfoStore";
+import { usePostRelayStore } from '@/app/stores/postRelayStore';
+import { useRelayInfoStore } from '@/app/stores/relayInfoStore';
 
-import RelayIcon from "./RelayIcon";
+import RelayIcon from './RelayIcon';
 
 export default function ReadRelayCards() {
   const { getRelayInfo } = useRelayInfoStore();
@@ -18,7 +18,7 @@ export default function ReadRelayCards() {
     // console.log("Setting read active");
 
     if (countActivePostRelays() === 5) {
-      alert("You can only have 5 active post relays.");
+      alert('You can only have 5 active post relays.');
       return;
     }
 
@@ -31,7 +31,7 @@ export default function ReadRelayCards() {
     // console.log("Setting read active");
 
     if (countActivePostRelays() === 1) {
-      alert("You must have at least one active post relay.");
+      alert('You must have at least one active post relay.');
       return;
     }
     updatePostRelayStatus(postRelay.url, false);
@@ -41,7 +41,7 @@ export default function ReadRelayCards() {
 
   return (
     <>
-      <p className="px-4 py-2 bg-zinc-50 text-zinc-500 dark:bg-zinc-900 dark:text-zinc-300">
+      <p className="bg-zinc-50 px-4 py-2 text-zinc-500 dark:bg-zinc-900 dark:text-zinc-300">
         Choose up to 5 relays to post content to
       </p>
       <ul
@@ -54,12 +54,12 @@ export default function ReadRelayCards() {
               <div className="-m-1 block flex-1 p-1">
                 <div className="absolute inset-0" aria-hidden="true" />
                 <div className="relative flex min-w-0 flex-1 items-center">
-                  <span className="relative inline-block flex-shrink-0">
+                  <span className="relative inline-block shrink-0">
                     <RelayIcon
                       src={
                         postRelay.url
-                          .replace("wss://", "https://")
-                          .replace("relay.", "") + "/favicon.ico"
+                          .replace('wss://', 'https://')
+                          .replace('relay.', '') + '/favicon.ico'
                       }
                       fallback="https://user-images.githubusercontent.com/29136904/244441447-d6f64435-6155-4ffa-8574-fb221a3ad412.png"
                       alt=""

@@ -1,9 +1,9 @@
-import * as crypto from "crypto";
+import * as crypto from 'crypto';
 
 export const shortenHash = (hash: string, length = 4 as number) => {
   if (hash) {
     return (
-      hash.substring(0, length) + "..." + hash.substring(hash.length - length)
+      hash.substring(0, length) + '...' + hash.substring(hash.length - length)
     );
   }
 };
@@ -28,16 +28,16 @@ export const uniqBy = <T>(arr: T[], key: keyof T): T[] => {
 };
 
 function generateUniqueHash(data: string, length: number): string {
-  const sha256 = crypto.createHash("sha256");
+  const sha256 = crypto.createHash('sha256');
   sha256.update(data);
-  return sha256.digest("hex").substring(0, length);
+  return sha256.digest('hex').substring(0, length);
 }
 
 function createUrlSlug(title: string): string {
   return title
     .toLowerCase()
-    .replace(/[^\w\s]/g, "")
-    .replace(/\s+/g, "-");
+    .replace(/[^\w\s]/g, '')
+    .replace(/\s+/g, '-');
 }
 
 export function createUniqueUrl(title: string): string {

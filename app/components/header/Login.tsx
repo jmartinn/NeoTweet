@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { useUserProfileStore } from "@/app/stores/userProfileStore";
-import UserProfile from "../profile/UserProfile";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
+
+import { useUserProfileStore } from '@/app/stores/userProfileStore';
+
+import UserProfile from '../profile/UserProfile';
 
 export default function Login({ children }: any) {
   const { userPublicKey, setUserPublicKey } = useUserProfileStore();
@@ -16,11 +18,21 @@ export default function Login({ children }: any) {
   }, []);
 
   const loginHandler = async () => {
-    if (typeof nostr !== "undefined") {
+    if (typeof nostr !== 'undefined') {
       const publicKey: string = await nostr.getPublicKey();
       setUserPublicKey(publicKey);
     }
   };
 
-  return mounted && <div>{userPublicKey === "" ? <button onClick={loginHandler}>{children}</button> : <UserProfile />}</div>;
+  return (
+    mounted && (
+      <div>
+        {userPublicKey === '' ? (
+          <button onClick={loginHandler}>{children}</button>
+        ) : (
+          <UserProfile />
+        )}
+      </div>
+    )
+  );
 }

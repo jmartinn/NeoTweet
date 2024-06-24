@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
-import type { Profile } from "../types";
+import type { Profile } from '../types';
 
 interface ProfileState {
   profiles: Record<string, Profile>;
@@ -24,7 +24,7 @@ export const useProfileStore = create<ProfileState>()(
           get().profiles[`${relay}_${publicKey}`],
       }),
       {
-        name: "neotweet-storage",
+        name: 'neotweet-storage',
         storage: createJSONStorage(() => sessionStorage),
       },
     ),

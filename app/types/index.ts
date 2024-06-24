@@ -1,6 +1,6 @@
 export enum Theme {
-  dark = "dark",
-  light = "light",
+  dark = 'dark',
+  light = 'light',
 }
 
 export type EventProfileContent = {
@@ -11,7 +11,7 @@ export type EventProfileContent = {
   nip05: string;
   lud16: string;
   [key: string]: any;
-}
+};
 
 export type Profile = {
   relay: string;
@@ -24,4 +24,8 @@ export type Profile = {
   website: string;
 };
 
-export type RelayMenuActiveTab = "Read From" | "Post To" | "Settings" | "Discover";
+export type RelayMenuActiveTab =
+  | 'Read From'
+  | 'Post To'
+  | 'Settings'
+  | 'Discover';

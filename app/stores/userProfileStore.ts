@@ -1,8 +1,8 @@
-import { create } from "zustand";
-import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import type { Event } from 'nostr-tools';
+import { create } from 'zustand';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
-import type { Profile } from "../types";
-import type { Event } from "nostr-tools";
+import type { Profile } from '../types';
 
 interface CurrentUserState {
   userPublicKey: string;
@@ -21,21 +21,25 @@ export const useUserProfileStore = create<CurrentUserState>()(
   devtools(
     persist(
       (set, get) => ({
-        userPublicKey: "",
+        userPublicKey: '',
         setUserPublicKey: (userPublicKey) => set({ userPublicKey }),
         getUserPublicKey: () => get().userPublicKey,
         userProfile: {},
-        setUserProfile: (relay, userProfile) => set((state) => ({ userProfile: { ...state.userProfile, [relay]: userProfile } })),
-        getUserProfile: (relay) => get().userProfile && get().userProfile[relay],
+        setUserProfile: (relay, userProfile) =>
+          set((state) => ({
+            userProfile: { ...state.userProfile, [relay]: userProfile },
+          })),
+        getUserProfile: (relay) =>
+          get().userProfile && get().userProfile[relay],
         clearUserProfile: () => set({ userProfile: {} }),
         userEvent: null,
         setUserEvent: (userEvent) => set({ userEvent }),
         getUserEvent: () => get().userEvent,
       }),
       {
-        name: "neotweet-login-storage",
+        name: 'neotweet-login-storage',
         storage: createJSONStorage(() => sessionStorage),
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

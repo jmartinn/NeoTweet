@@ -1,8 +1,9 @@
-import { useReadRelayStore } from "@/app/stores/readRelayStore";
-import { useRelayStore } from "@/app/stores/relayStore";
+import { useReadRelayStore } from '@/app/stores/readRelayStore';
+import { useRelayStore } from '@/app/stores/relayStore';
 
-import { useRelayInfoStore } from "../../stores/relayInfoStore";
-import RelayIcon from "./RelayIcon";
+import { useRelayInfoStore } from '../../stores/relayInfoStore';
+
+import RelayIcon from './RelayIcon';
 
 export default function ReadRelayCards() {
   const { getRelayInfo } = useRelayInfoStore();
@@ -15,7 +16,7 @@ export default function ReadRelayCards() {
   } = useReadRelayStore();
 
   const handleSetReadActive = (readRelay: any) => {
-    console.log("Setting read active");
+    console.log('Setting read active');
     setRelayUrl(readRelay.url);
     setAllReadRelaysInactive();
     updateReadRelayStatus(readRelay.url, true);
@@ -25,7 +26,7 @@ export default function ReadRelayCards() {
 
   return (
     <>
-      <p className="px-4 py-2 bg-zinc-50 text-zinc-500 dark:bg-zinc-900 dark:text-zinc-300">
+      <p className="bg-zinc-50 px-4 py-2 text-zinc-500 dark:bg-zinc-900 dark:text-zinc-300">
         Choose a relay to read content from
       </p>
       <ul
@@ -38,12 +39,12 @@ export default function ReadRelayCards() {
               <div className="-m-1 block flex-1 p-1">
                 <div className="absolute inset-0" aria-hidden="true" />
                 <div className="relative flex min-w-0 flex-1 items-center">
-                  <span className="relative inline-block flex-shrink-0">
+                  <span className="relative inline-block shrink-0">
                     <RelayIcon
                       src={
                         readRelay.url
-                          .replace("wss://", "https://")
-                          .replace("relay.", "") + "/favicon.ico"
+                          .replace('wss://', 'https://')
+                          .replace('relay.', '') + '/favicon.ico'
                       }
                       fallback="https://user-images.githubusercontent.com/29136904/244441447-d6f64435-6155-4ffa-8574-fb221a3ad412.png"
                       alt=""
@@ -57,7 +58,7 @@ export default function ReadRelayCards() {
                             <span>{getRelayInfo(readRelay.url).name}</span>
                             <span
                               className="z-20 inline-flex select-none items-center px-2 text-xs font-medium text-green-600 dark:text-green-400 dark:ring-green-500/20"
-                              // className="z-20 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-500/10 dark:text-green-400 dark:ring-green-500/20"
+                            // className="z-20 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-500/10 dark:text-green-400 dark:ring-green-500/20"
                             >
                               Active
                             </span>

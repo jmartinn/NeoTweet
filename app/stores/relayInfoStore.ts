@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
 type Limitation = {
   max_message_length: number;
@@ -37,7 +37,7 @@ interface InfoState {
 
 interface RelayStore {
   relayInfoRecord: Record<string, InfoState>;
-  addRelayInfo: (relayUrl: string, info: Omit<InfoState, "url">) => void;
+  addRelayInfo: (relayUrl: string, info: Omit<InfoState, 'url'>) => void;
   getRelayInfo: (relayUrl: string) => InfoState;
   getAllRelayInfo: () => InfoState[];
   removeRelayInfo: (relayUrl: string) => void;
@@ -69,7 +69,7 @@ export const useRelayInfoStore = create<RelayStore>()(
           }),
       }),
       {
-        name: "neotweet-relayinfo-storage",
+        name: 'neotweet-relayinfo-storage',
         storage: createJSONStorage(() => sessionStorage),
       },
     ),

@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { RELAYS } from "@/app/lib/constants";
-import { useRelayStore } from "@/app/stores/relayStore";
-import { useUserProfileStore } from "@/app/stores/userProfileStore";
-import type { Event } from "nostr-tools";
+import type { Event } from 'nostr-tools';
 
-import { shortenHash } from "../../lib/utils";
-import { EventProfileContent, Profile } from "../../types";
-import UserMenu from "../menus/UserMenu";
+import { RELAYS } from '@/app/lib/constants';
+import { useRelayStore } from '@/app/stores/relayStore';
+import { useUserProfileStore } from '@/app/stores/userProfileStore';
+
+import { shortenHash } from '../../lib/utils';
+import { EventProfileContent, Profile } from '../../types';
+import UserMenu from '../menus/UserMenu';
 
 export default function UserProfile() {
   const { subscribe, activeRelay, connect, relayUrl, setRelayUrl } =
@@ -23,7 +24,7 @@ export default function UserProfile() {
   }, []);
 
   const getEvents = async () => {
-    console.log("GET EVENTS FOR", relayUrl);
+    console.log('GET EVENTS FOR', relayUrl);
     if (currentProfile && currentProfile.relay === relayUrl) {
       return;
     }
@@ -46,19 +47,19 @@ export default function UserProfile() {
     };
 
     const onEvent = (event: Event) => {
-      console.log("event", event);
+      console.log('event', event);
       setUserEvent(event);
       const eventContent: EventProfileContent = JSON.parse(event.content);
 
       const profile: Profile = {
-        relay: relayUrl || "",
-        publicKey: getUserPublicKey() || "",
-        name: eventContent.name || shortenHash(getUserPublicKey()) || "",
-        about: eventContent.about || "",
-        picture: eventContent.picture || "",
-        nip05: eventContent.nip05 || "",
-        website: eventContent.website || "",
-        lud06: eventContent.lud06 || "",
+        relay: relayUrl || '',
+        publicKey: getUserPublicKey() || '',
+        name: eventContent.name || shortenHash(getUserPublicKey()) || '',
+        about: eventContent.about || '',
+        picture: eventContent.picture || '',
+        nip05: eventContent.nip05 || '',
+        website: eventContent.website || '',
+        lud06: eventContent.lud06 || '',
       };
 
       setUserProfile(relayUrl, profile);
@@ -79,7 +80,7 @@ export default function UserProfile() {
       <UserMenu>
         {currentProfile && (
           <img
-            className="mt-1.5 inline-block h-10 w-10 rounded-full shadow-lg backdrop-blur shadow-zinc-800/10 ring-1 ring-zinc-900/10 dark:ring-white/10"
+            className="mt-1.5 inline-block size-10 rounded-full shadow-lg shadow-zinc-800/10 ring-1 ring-zinc-900/10 backdrop-blur dark:ring-white/10"
             src={currentProfile.picture}
             alt=""
           />
