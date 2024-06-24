@@ -3,13 +3,12 @@ import { Fragment, useEffect, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 
-import { usePostRelayStore } from '@/app/stores/postRelayStore';
-import { useReadRelayStore } from '@/app/stores/readRelayStore';
-import { useRelayStore } from '@/app/stores/relayStore';
+import { usePostRelayStore } from '@/app/stores/post-relay-store';
+import { useReadRelayStore } from '@/app/stores/read-relay-store';
+import { useRelayInfoStore } from '@/app/stores/relay-info-store';
+import { useRelayStore } from '@/app/stores/relay-store';
 
-import { useRelayInfoStore } from '../../stores/relayInfoStore';
-
-import RelayIcon from './RelayIcon';
+import RelayIcon from './relay-icon';
 
 export default function RelaySettings() {
   const { getRelayInfo } = useRelayInfoStore();

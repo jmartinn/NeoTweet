@@ -1,9 +1,8 @@
-import { useReadRelayStore } from '@/app/stores/readRelayStore';
-import { useRelayStore } from '@/app/stores/relayStore';
+import { useReadRelayStore } from '@/app/stores/read-relay-store';
+import { useRelayInfoStore } from '@/app/stores/relay-info-store';
+import { useRelayStore } from '@/app/stores/relay-store';
 
-import { useRelayInfoStore } from '../../stores/relayInfoStore';
-
-import RelayIcon from './RelayIcon';
+import RelayIcon from './relay-icon';
 
 export default function ReadRelayCards() {
   const { getRelayInfo } = useRelayInfoStore();
@@ -58,7 +57,7 @@ export default function ReadRelayCards() {
                             <span>{getRelayInfo(readRelay.url).name}</span>
                             <span
                               className="z-20 inline-flex select-none items-center px-2 text-xs font-medium text-green-600 dark:text-green-400 dark:ring-green-500/20"
-                            // className="z-20 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-500/10 dark:text-green-400 dark:ring-green-500/20"
+                              // className="z-20 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-500/10 dark:text-green-400 dark:ring-green-500/20"
                             >
                               Active
                             </span>

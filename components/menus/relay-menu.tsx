@@ -5,14 +5,14 @@ import { Fragment, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { InformationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-import { useRelayInfoStore } from '@/app/stores/relayInfoStore';
-import { useRelayMenuStore } from '@/app/stores/relayMenuStore';
-import { useRelayStore } from '@/app/stores/relayStore';
+import { useRelayInfoStore } from '@/app/stores/relay-info-store';
+import { useRelayMenuStore } from '@/app/stores/relay-menu-store';
+import { useRelayStore } from '@/app/stores/relay-store';
 
-import PostRelayCards from './PostRelayCards';
-import ReadRelayCards from './ReadRelayCards';
-import RelayDiscover from './RelayDiscover';
-import RelaySettings from './RelaySettings';
+import PostRelayCards from './post-relay-cards';
+import ReadRelayCards from './read-relays-card';
+import RelayDiscover from './relay-discover';
+import RelaySettings from './relay-discover';
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');

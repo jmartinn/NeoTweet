@@ -4,9 +4,8 @@ import Link from 'next/link';
 
 import { Theme } from '@/app/types';
 
-import Login from './Login';
-import ThemeToggle from './ThemeToggle';
-
+import Login from './login';
+import ThemeToggle from './theme-toggle';
 
 export default function Header() {
   const theme =

@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Fuse from 'fuse.js';
 
-import { usePostRelayStore } from '@/app/stores/postRelayStore';
-import { useReadRelayStore } from '@/app/stores/readRelayStore';
-import { useRelayInfoStore } from '@/app/stores/relayInfoStore';
-import { useRelayStore } from '@/app/stores/relayStore';
+import { usePostRelayStore } from '@/app/stores/post-relay-store';
+import { useReadRelayStore } from '@/app/stores/read-relay-store';
+import { useRelayInfoStore } from '@/app/stores/relay-info-store';
+import { useRelayStore } from '@/app/stores/relay-store';
 
-import RelayIcon from './RelayIcon';
+import RelayIcon from './relay-icon';
 
 const options = {
   includeScore: false,
@@ -143,8 +143,8 @@ export default function RelayDiscover() {
         {relaySearch.length > 0
           ? relaySearch.map((relay: any) => SearchItem(relay.item))
           : excludeItems(getAllRelayInfo(), [...postRelays, ...readRelays]).map(
-            (relay: any) => SearchItem(relay),
-          )}
+              (relay: any) => SearchItem(relay),
+            )}
       </ul>
     </>
   );

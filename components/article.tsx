@@ -2,10 +2,10 @@ import { useRouter } from 'next/navigation';
 import { nip19, type Event } from 'nostr-tools';
 import type { AddressPointer } from 'nostr-tools/nip19';
 
-import { getTagValues } from '../lib/utils';
-import { useArticleEventStore } from '../stores/eventStore';
-import { useProfileStore } from '../stores/profileStore';
-import { useRelayStore } from '../stores/relayStore';
+import { useArticleEventStore } from '@/app/stores/event-store';
+import { useProfileStore } from '@/app/stores/profile-store';
+import { useRelayStore } from '@/app/stores/relay-store';
+import { getTagValues } from '@/lib/utils';
 
 interface Props {
   event: Event;

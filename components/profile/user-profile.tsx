@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 
 import type { Event } from 'nostr-tools';
 
-import { RELAYS } from '@/app/lib/constants';
-import { useRelayStore } from '@/app/stores/relayStore';
-import { useUserProfileStore } from '@/app/stores/userProfileStore';
+import { useRelayStore } from '@/app/stores/relay-store';
+import { useUserProfileStore } from '@/app/stores/user-profile-store';
+import type { EventProfileContent, Profile } from '@/app/types';
+import { RELAYS } from '@/lib/constants';
+import { shortenHash } from '@/lib/utils';
 
-import { shortenHash } from '../../lib/utils';
-import { EventProfileContent, Profile } from '../../types';
-import UserMenu from '../menus/UserMenu';
+import UserMenu from '../menus/user-menu';
 
 export default function UserProfile() {
   const { subscribe, activeRelay, connect, relayUrl, setRelayUrl } =
@@ -66,7 +66,7 @@ export default function UserProfile() {
       setCurrentProfile(profile);
     };
 
-    const onEOSE = () => { };
+    const onEOSE = () => {};
 
     subscribe([relayUrl], filter, onEvent, onEOSE);
   };

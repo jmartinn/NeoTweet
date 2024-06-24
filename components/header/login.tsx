@@ -2,11 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
-import { useRouter } from 'next/router';
-
-import { useUserProfileStore } from '@/app/stores/userProfileStore';
-
-import UserProfile from '../profile/UserProfile';
+import { useUserProfileStore } from '@/app/stores/user-profile-store';
+import UserProfile from '@/components/profile/user-profile';
 
 export default function Login({ children }: any) {
   const { userPublicKey, setUserPublicKey } = useUserProfileStore();

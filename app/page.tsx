@@ -5,14 +5,13 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import type { Event } from 'nostr-tools';
 
-import Article from './components/Article';
-import RelayMenu from './components/menus/RelayMenu';
-import { getTagValues } from './lib/utils';
-import { useArticleEventStore } from './stores/eventStore';
-import { useProfileStore } from './stores/profileStore';
-import { useRelayStore } from './stores/relayStore';
-import { Profile } from './types';
-
+import { useArticleEventStore } from '@/app/stores/event-store';
+import { useProfileStore } from '@/app/stores/profile-store';
+import { useRelayStore } from '@/app/stores/relay-store';
+import type { Profile } from '@/app/types';
+import Article from '@/components/article';
+import RelayMenu from '@/components/menus/relay-menu';
+import { getTagValues } from '@/lib/utils';
 
 export default function Home() {
   const { articleEvents, getArticleEvents, setArticleEvents } =
@@ -82,7 +81,7 @@ export default function Home() {
         setProfile(profile);
       };
 
-      const onEOSE = () => { };
+      const onEOSE = () => {};
 
       subscribe([relayUrl], userFilter, onEvent, onEOSE);
     };

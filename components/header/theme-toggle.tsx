@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 
-import { Theme } from '../../types';
+import { Theme } from '@/app/types';
 
 interface Props {
   theme: Theme;

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
-import Footer from './components/footer/Footer';
-import Header from './components/header/Header';
+import Footer from '@/components/footer';
+import Header from '@/components/header/header';
 
 import './globals.css';
 

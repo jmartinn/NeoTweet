@@ -2,10 +2,10 @@ import { Fragment, useEffect, useState } from 'react';
 
 import { Popover, Transition } from '@headlessui/react';
 
-import { useRelayInfoStore } from '@/app/stores/relayInfoStore';
-import { useRelayMenuStore } from '@/app/stores/relayMenuStore';
-import { useRelayStore } from '@/app/stores/relayStore';
-import { useUserProfileStore } from '@/app/stores/userProfileStore';
+import { useRelayInfoStore } from '@/app/stores/relay-info-store';
+import { useRelayMenuStore } from '@/app/stores/relay-menu-store';
+import { useRelayStore } from '@/app/stores/relay-store';
+import { useUserProfileStore } from '@/app/stores/user-profile-store';
 import { Profile } from '@/app/types';
 
 const links = [

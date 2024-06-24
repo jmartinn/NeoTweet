@@ -1,7 +1,7 @@
-import { usePostRelayStore } from '@/app/stores/postRelayStore';
-import { useRelayInfoStore } from '@/app/stores/relayInfoStore';
+import { usePostRelayStore } from '@/app/stores/post-relay-store';
+import { useRelayInfoStore } from '@/app/stores/relay-info-store';
 
-import RelayIcon from './RelayIcon';
+import RelayIcon from './relay-icon';
 
 export default function ReadRelayCards() {
   const { getRelayInfo } = useRelayInfoStore();

@@ -7,9 +7,9 @@ import { nip19 } from 'nostr-tools';
 import { Event } from 'nostr-tools';
 import type { AddressPointer } from 'nostr-tools/nip19';
 
-import { getTagValues } from '@/app/lib/utils';
-import { useArticleEventStore } from '@/app/stores/eventStore';
-import { useRelayStore } from '@/app/stores/relayStore';
+import { useArticleEventStore } from '@/app/stores/event-store';
+import { useRelayStore } from '@/app/stores/relay-store';
+import { getTagValues } from '@/lib/utils';
 
 export default function Blog() {
   const { subscribe, relayUrl } = useRelayStore();

@@ -2,7 +2,7 @@ import { relayInit } from 'nostr-tools';
 import type { Event, Relay } from 'nostr-tools';
 import { create } from 'zustand';
 
-import { RELAYS } from '@/app/lib/constants';
+import { RELAYS } from '@/lib/constants';
 
 export interface RelaysState {
   allRelays: string[];
