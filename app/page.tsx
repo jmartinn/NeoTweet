@@ -12,6 +12,7 @@ import { useRelayStore } from '@/app/stores/relay-store';
 import { Profile } from '@/app/types';
 import { Article } from '@/components/article';
 import { Icons } from '@/components/icons';
+import { Badge } from '@/components/ui/badge';
 import { getTagValues } from '@/lib/utils';
 
 export default function Home() {
@@ -144,24 +145,12 @@ export default function Home() {
             </h2>
             <div className="ml-3 mt-6 space-y-6">
               <div className="flex flex-wrap items-start gap-4 text-zinc-800 dark:text-zinc-300">
-                <span className="inline-flex cursor-pointer items-center rounded-2xl bg-gray-50 px-3 py-2 text-sm text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20">
-                  neovim
-                </span>
-                <span className="inline-flex cursor-pointer items-center rounded-2xl bg-gray-50 px-3 py-2 text-sm text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20">
-                  lazy
-                </span>
-                <span className="inline-flex cursor-pointer items-center rounded-2xl bg-gray-50 px-3 py-2 text-sm text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20">
-                  telescope
-                </span>
-                <span className="inline-flex cursor-pointer items-center rounded-2xl bg-gray-50 px-3 py-2 text-sm text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20">
-                  lua
-                </span>
-                <span className="inline-flex cursor-pointer items-center rounded-2xl bg-gray-50 px-3 py-2 text-sm text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20">
-                  vimscript
-                </span>
-                <span className="inline-flex cursor-pointer items-center rounded-2xl bg-gray-50 px-3 py-2 text-sm text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20">
-                  plugin
-                </span>{' '}
+                <Badge variant="secondary">neovim</Badge>
+                <Badge variant="secondary">lazy</Badge>
+                <Badge variant="secondary">telescope</Badge>
+                <Badge variant="secondary">lua</Badge>
+                <Badge variant="secondary">vimscript</Badge>
+                <Badge variant="secondary">plugin</Badge>{' '}
               </div>
             </div>
           </div>
