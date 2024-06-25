@@ -35,9 +35,9 @@ export default function Header() {
               <ThemeToggle theme={theme} />
               <Login>
                 <div className="ml-6 flex flex-1 justify-end">
-                  <a
+                  <Link
                     href="/login"
-                    className="group flex items-center space-x-1 text-sm font-semibold leading-6 text-purple-500 transition-all duration-300 hover:text-purple-700 dark:text-teal-400 dark:hover:text-teal-500"
+                    className="group flex items-center space-x-1 rounded-full px-4 py-2 text-sm font-semibold leading-6 text-purple-500 shadow-lg shadow-zinc-800/10 ring-2 ring-zinc-900/10 backdrop-blur transition-all duration-300 hover:text-purple-700 hover:shadow-purple-500/20 dark:text-teal-400 dark:shadow-lg dark:shadow-zinc-500/10 dark:ring-white/10 dark:hover:text-teal-500 dark:hover:shadow-teal-500/10"
                   >
                     <span>Log in</span>
                     <span
@@ -46,7 +46,7 @@ export default function Header() {
                     >
                       <Icons.ArrowRight className="size-4" />
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </Login>
             </div>
