@@ -26,11 +26,19 @@ export function shortenHash(hash: string, length = 4): string | undefined {
   }
 }
 
-export function getTagValues(name: string, tags: string[][]): string {
+export function getTagValues(name: string, tags: string[][]) {
   const [itemTag] = tags.filter((tag: string[]) => tag[0] === name);
   const [, item] = itemTag || [, undefined];
 
   return item;
+}
+
+export function extractHashtags(tags: string[][]) {
+  return tags
+    .filter((tag) => tag[0] === 't')
+    .flatMap((tag) => tag[1].split(/\s+/))
+    .filter((tag) => tag.startsWith('#'))
+    .map((tag) => tag.substring(1));
 }
 
 export function uniqBy<T>(arr: T[], key: keyof T): T[] {

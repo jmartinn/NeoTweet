@@ -5,7 +5,7 @@ import type { AddressPointer } from 'nostr-tools/nip19';
 import { useArticleEventStore } from '@/app/stores/event-store';
 import { useProfileStore } from '@/app/stores/profile-store';
 import { useRelayStore } from '@/app/stores/relay-store';
-import { getTagValues } from '@/lib/utils';
+import { extractHashtags, getTagValues } from '@/lib/utils';
 
 import { Icons } from './icons';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
@@ -38,6 +38,8 @@ export function Article({ event }: ArticleProps): JSX.Element {
     setCachedArticleEvent(event);
     router.push(nip19.naddrEncode(addressPointer));
   };
+
+  const hashtags = extractHashtags(event.tags);
 
   return (
     <article
@@ -74,9 +76,15 @@ export function Article({ event }: ArticleProps): JSX.Element {
       <p className="text-muted-foreground relative z-10 mt-2 text-justify text-sm">
         {getTagValues('summary', event.tags)}
       </p>
-      <Badge variant="tag" className="z-10 mt-4">
-        NeoVim
-      </Badge>
+      {hashtags && (
+        <div className="z-10 mt-4 flex flex-wrap gap-2">
+          {hashtags.map((tag: string) => (
+            <Badge variant="tag" key={tag}>
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      )}
       <div
         aria-hidden="true"
         className="group relative z-10 mt-4 flex items-center text-sm font-medium text-purple-500 transition-all duration-300 group-hover:text-purple-700 dark:text-teal-500 dark:group-hover:text-teal-400"

@@ -91,8 +91,9 @@ export default function Blog() {
             <h1 className="mt-6 text-5xl font-bold tracking-tighter">
               {getTagValues('title', articleEvent.tags)}
             </h1>
-            <div className="mt-6 flex items-center gap-x-4 pb-2">
+            <div className="mt-6 flex items-center gap-4 pb-2">
               <Avatar className="size-10">
+                {' '}
                 <AvatarImage
                   src={getProfile(relayUrl, articleEvent.pubkey)?.picture}
                 />
@@ -101,42 +102,41 @@ export default function Blog() {
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
-                <div className="flex flex-row space-x-2">
-                  <p>Guillermo Rauch</p>
-                </div>
-                <div className="flex flex-row space-x-2">
-                  <div className="flex space-x-1">
-                    <p className="text-muted-foreground flex items-center text-sm">
+                <p className="font-medium">Guillermo Rauch</p>
+                <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-1">
+                    <p className="text-muted-foreground text-sm">
                       Published in
                     </p>
                     <Link
-                      className="mx-auto text-sm hover:underline"
+                      className="text-sm hover:underline"
                       href="/tags/neovim"
                     >
+                      {' '}
                       Damus
                     </Link>
                   </div>
-                  <span className="flex items-center" aria-hidden="true">
-                    <span className="bg-muted-foreground/40 h-4 w-0.5 rounded-full" />
-                  </span>
+                  <span
+                    className="bg-muted-foreground/40 h-4 w-0.5 rounded-full"
+                    aria-hidden="true"
+                  />{' '}
                   <time
                     dateTime="2022-09-05"
-                    className="flex items-center text-sm text-zinc-400 dark:text-zinc-500"
+                    className="text-sm text-zinc-400 dark:text-zinc-500"
                   >
-                    <span>
-                      {new Date(
-                        articleEvent.created_at * 1000,
-                      ).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </span>
+                    {new Date(
+                      articleEvent.created_at * 1000,
+                    ).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
                   </time>
                 </div>
               </div>
             </div>
           </header>
+          <hr className="border-muted-foreground dark:border-muted-foreground/40 mt-8" />
           <article
             dangerouslySetInnerHTML={{ __html: markdown }}
             className="prose dark:prose-invert mt-8"
