@@ -74,7 +74,7 @@ export function Article({ event }: ArticleProps): JSX.Element {
       <p className="text-muted-foreground relative z-10 mt-2 text-justify text-sm">
         {getTagValues('summary', event.tags)}
       </p>
-      <Badge variant="secondary" className="z-10 mt-4">
+      <Badge variant="tag" className="z-10 mt-4">
         NeoVim
       </Badge>
       <div
