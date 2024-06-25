@@ -17,14 +17,15 @@ export default function Header() {
         <div className="mx-auto max-w-2xl lg:max-w-5xl">
           <div className="relative flex items-center gap-4">
             <div className="flex flex-1">
-              <span className="text-3xl text-zinc-500 dark:text-zinc-200">
+              <span className="group flex text-3xl text-zinc-500 dark:text-zinc-200">
+                <Icons.Logo className="my-auto size-10" />
                 <Link
-                  className="relative block px-3 py-2 font-medium transition hover:text-teal-500 dark:hover:text-teal-400"
+                  className="relative block px-3 py-2 font-medium transition-colors duration-300 hover:text-teal-500 dark:hover:text-teal-400"
                   href="/"
                 >
                   NeoTweet
                 </Link>
-              </span>
+              </span>{' '}
             </div>
             <NavBar />
             <div className="flex items-center justify-end gap-x-4 md:flex-1">

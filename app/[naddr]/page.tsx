@@ -2,16 +2,20 @@
 
 import { useEffect, useState } from 'react';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { nip19, type Event } from 'nostr-tools';
 import type { AddressPointer } from 'nostr-tools/nip19';
 
 import { useArticleEventStore } from '@/app/stores/event-store';
+import { useProfileStore } from '@/app/stores/profile-store';
 import { useRelayStore } from '@/app/stores/relay-store';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getTagValues } from '@/lib/utils';
 
 export default function Blog() {
   const { subscribe, relayUrl } = useRelayStore();
+  const { getProfile } = useProfileStore();
   const {
     cachedEvent: cachedArticleEvent,
     setCachedEvent: setCachedArticleEvent,
@@ -45,7 +49,7 @@ export default function Blog() {
         }
         // console.log('subscribing to article');
         const onEvent = (event: never) => {
-          // console.log('article event', event);
+          console.log('article event', event);
           setArticle(event);
         };
 
@@ -82,27 +86,56 @@ export default function Blog() {
   return (
     <div className="xl:relative">
       {articleEvent ? (
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-3xl">
           <header className="flex flex-col">
-            <h1 className="mt-6 text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+            <h1 className="mt-6 text-5xl font-bold tracking-tighter">
               {getTagValues('title', articleEvent.tags)}
             </h1>
-            <time
-              dateTime="2022-09-05"
-              className="order-first flex items-center text-base text-zinc-400 dark:text-zinc-500"
-            >
-              <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
-              <span className="ml-3">
-                {new Date(articleEvent.created_at * 1000).toLocaleDateString(
-                  'en-US',
-                  {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  },
-                )}
-              </span>
-            </time>
+            <div className="mt-6 flex items-center gap-x-4 pb-2">
+              <Avatar className="size-10">
+                <AvatarImage
+                  src={getProfile(relayUrl, articleEvent.pubkey)?.picture}
+                />
+                <AvatarFallback className="text-xs font-medium">
+                  NT
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col">
+                <div className="flex flex-row space-x-2">
+                  <p>Guillermo Rauch</p>
+                </div>
+                <div className="flex flex-row space-x-2">
+                  <div className="flex space-x-1">
+                    <p className="text-muted-foreground flex items-center text-sm">
+                      Published in
+                    </p>
+                    <Link
+                      className="mx-auto text-sm hover:underline"
+                      href="/tags/neovim"
+                    >
+                      Damus
+                    </Link>
+                  </div>
+                  <span className="flex items-center" aria-hidden="true">
+                    <span className="bg-muted-foreground/40 h-4 w-0.5 rounded-full" />
+                  </span>
+                  <time
+                    dateTime="2022-09-05"
+                    className="flex items-center text-sm text-zinc-400 dark:text-zinc-500"
+                  >
+                    <span>
+                      {new Date(
+                        articleEvent.created_at * 1000,
+                      ).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </span>
+                  </time>
+                </div>
+              </div>
+            </div>
           </header>
           <article
             dangerouslySetInnerHTML={{ __html: markdown }}
