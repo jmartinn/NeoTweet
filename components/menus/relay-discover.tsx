@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Fuse from 'fuse.js';
 
 import { usePostRelayStore } from '@/app/stores/post-relay-store';
 import { useReadRelayStore } from '@/app/stores/read-relay-store';
 import { useRelayInfoStore } from '@/app/stores/relay-info-store';
 import { useRelayStore } from '@/app/stores/relay-store';
+import { Icons } from '@/components/icons';
 
 import RelayIcon from './relay-icon';
 
@@ -129,7 +129,7 @@ export default function RelayDiscover() {
             className="block w-full rounded-md border-0 py-4 pl-4 pr-14 text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6 dark:bg-zinc-900 dark:text-zinc-100 dark:ring-zinc-700 dark:placeholder:text-zinc-400"
           />
           <div className="absolute inset-y-0 right-0 flex py-4 pr-4">
-            <MagnifyingGlassIcon
+            <Icons.Magnifier
               className="size-5 text-zinc-400"
               aria-hidden="true"
             />

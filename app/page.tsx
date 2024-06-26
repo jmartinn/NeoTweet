@@ -7,16 +7,17 @@ import type { Event } from 'nostr-tools';
 
 import { useArticleEventStore } from '@/app/stores/event-store';
 import { useProfileStore } from '@/app/stores/profile-store';
-// import { useRelayMenuStore } from '@/app/stores/relay-menu-store';
+import { useRelayMenuStore } from '@/app/stores/relay-menu-store';
 import { useRelayStore } from '@/app/stores/relay-store';
 import { Profile } from '@/app/types';
 import { Article } from '@/components/article';
-// import { Icons } from '@/components/icons';
+import { Icons } from '@/components/icons';
+import RelaySheet from '@/components/menus/relay-sheet';
 import { Badge } from '@/components/ui/badge';
 import { getTagValues } from '@/lib/utils';
 
 export default function Home() {
-  // const { setRelayMenuIsOpen } = useRelayMenuStore();
+  const { setRelayMenuIsOpen } = useRelayMenuStore();
 
   const {
     getEvents: getArticleEvents,
@@ -88,7 +89,7 @@ export default function Home() {
         setProfile(profile);
       };
 
-      const onEOSE = () => { };
+      const onEOSE = () => {};
 
       subscribe([relayUrl], userFilter, onEvent, onEOSE);
     };
@@ -115,6 +116,7 @@ export default function Home() {
       </div>
 
       {/* Sidebar */}
+      <RelaySheet />
       <div className="hidden lg:block">
         <div className="lg:grid-area: sidebar sticky top-10 space-y-10 lg:pl-16 xl:pl-24">
           <div className="rounded-2xl border-2 border-zinc-200/80 p-6 dark:border-zinc-700/40">
@@ -158,13 +160,13 @@ export default function Home() {
             </div>
           </div>
 
-          {/* <button */}
-          {/*   className="relative flex items-center gap-x-2 rounded-full bg-teal-500/90 px-3 py-2 text-sm font-medium text-teal-50 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition hover:bg-teal-500 dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10" */}
-          {/*   onClick={() => setRelayMenuIsOpen(true)} */}
-          {/* > */}
-          {/*   <Icons.PencilSquare className="-mr-1 ml-1 flex size-4 items-center text-teal-50" /> */}
-          {/*   <span>write</span> */}
-          {/* </button> */}
+          <button
+            className="relative flex items-center gap-x-2 rounded-full bg-teal-500/90 px-3 py-2 text-sm font-medium text-teal-50 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition hover:bg-teal-500 dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10"
+            onClick={() => setRelayMenuIsOpen(true)}
+          >
+            <Icons.PencilSquare className="-mr-1 ml-1 flex size-4 items-center text-teal-50" />
+            <span>write</span>
+          </button>
         </div>
       </div>
     </div>

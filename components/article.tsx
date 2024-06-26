@@ -73,7 +73,7 @@ export function Article({ event }: ArticleProps): JSX.Element {
         </span>
         <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-zinc-800/50" />
       </h2>
-      <p className="text-muted-foreground relative z-10 mt-2 text-justify text-sm">
+      <p className="text-muted-foreground relative z-10 mt-2 line-clamp-3 text-justify text-sm">
         {getTagValues('summary', event.tags)}
       </p>
       {hashtags && (
