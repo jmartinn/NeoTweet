@@ -12,7 +12,7 @@ import { useRelayStore } from '@/app/stores/relay-store';
 import { Profile } from '@/app/types';
 import { Article } from '@/components/article';
 import { Icons } from '@/components/icons';
-import RelaySheet from '@/components/menus/relay-sheet';
+import { RelaySheet } from '@/components/menus/relay-menu';
 import { Badge } from '@/components/ui/badge';
 import { getTagValues } from '@/lib/utils';
 
@@ -89,7 +89,7 @@ export default function Home() {
         setProfile(profile);
       };
 
-      const onEOSE = () => {};
+      const onEOSE = () => { };
 
       subscribe([relayUrl], userFilter, onEvent, onEOSE);
     };

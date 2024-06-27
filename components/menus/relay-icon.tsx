@@ -1,18 +1,12 @@
-import React from 'react';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 export default function RelayIcon({ src, fallback, alt }: any) {
-  const [imgSrc, setImgSrc] = React.useState(src);
-
-  const handleError = () => {
-    setImgSrc(fallback);
-  };
-
   return (
-    <img
-      className="size-10 rounded-full"
-      src={imgSrc}
-      onError={handleError}
-      alt={alt}
-    />
+    <Avatar className="size-8">
+      <AvatarImage src={src} alt={alt} />
+      <AvatarFallback className="text-xs font-medium">
+        <AvatarImage src={fallback} alt={alt} />
+      </AvatarFallback>
+    </Avatar>
   );
 }

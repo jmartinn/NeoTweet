@@ -8,11 +8,11 @@ import {
 } from '@/components/ui/sheet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import PostRelayCards from './post-relay-cards';
-import ReadRelayCards from './read-relays-card';
+import PostRelayList from './post-relay-list';
+import ReadRelayList from './read-relay-list';
 import RelayDiscover from './relay-discover';
 
-export default function RelaySheet() {
+export function RelaySheet() {
   const { relayMenuIsOpen, setRelayMenuIsOpen } = useRelayMenuStore();
   return (
     <Sheet open={relayMenuIsOpen} onOpenChange={setRelayMenuIsOpen}>
@@ -30,10 +30,10 @@ export default function RelaySheet() {
             <TabsTrigger value="discover">Discover</TabsTrigger>
           </TabsList>
           <TabsContent value="read-from">
-            <ReadRelayCards />
+            <ReadRelayList />
           </TabsContent>
           <TabsContent value="post-to">
-            <PostRelayCards />
+            <PostRelayList />
           </TabsContent>
           <TabsContent value="discover">
             <RelayDiscover />

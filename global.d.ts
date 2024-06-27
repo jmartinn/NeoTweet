@@ -1,5 +1,3 @@
-// import type { Event } from "nostr-tools";
-
 interface Window {
   nostr: Nostr;
   webln: WebLN;
