@@ -55,16 +55,19 @@ export const useRelayStore = create<RelaysState>((set) => ({
     }
 
     if (existingRelay) {
+      // TODO: Log this to a toast message
       console.log('info', `✅ nostr (${newRelayUrl}): Already connected!`);
       relay = existingRelay;
       useRelayStore.setState({ activeRelay: relay });
     } else {
+      // TODO: Log this to a toast message
       console.log('NEWING UP A RELAY');
       relay = relayInit(newRelayUrl);
 
       await relay.connect();
 
       relay.on('connect', () => {
+        // TODO: Log this to a toast message
         console.log('info', `✅ nostr (${newRelayUrl}): Connected!`);
         const relayUrl = useRelayStore.getState().relayUrl;
         if (relayUrl === relay.url) {
@@ -84,7 +87,6 @@ export const useRelayStore = create<RelaysState>((set) => ({
       });
 
       relay.on('disconnect', () => {
-        console.log('warn', `🚪 nostr (${newRelayUrl}): Connection closed.`);
         set({
           connectedRelays: new Set(
             [...connectedRelays].filter((r) => r.url !== relay.url),
@@ -93,6 +95,7 @@ export const useRelayStore = create<RelaysState>((set) => ({
       });
 
       relay.on('error', () => {
+        // TODO: Implement proper error handling and toast messages
         console.log('error', `❌ nostr (${newRelayUrl}): Connection error!`);
       });
     }
