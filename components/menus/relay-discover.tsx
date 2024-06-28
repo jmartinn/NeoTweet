@@ -42,7 +42,7 @@ export default function RelayDiscover() {
   useEffect(() => {
     allRelays.forEach((relayUrl) => {
       const cachedRelayInfo = getRelayInfo(relayUrl);
-      let relayHttpUrl = relayUrl.replace('wss://', 'https://');
+      const relayHttpUrl = relayUrl.replace('wss://', 'https://');
       if (cachedRelayInfo === undefined) {
         const getRelayInfo = async (url: string) => {
           try {

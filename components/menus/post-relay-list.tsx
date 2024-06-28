@@ -2,6 +2,7 @@ import { usePostRelayStore } from '@/app/stores/post-relay-store';
 import { useRelayInfoStore } from '@/app/stores/relay-info-store';
 
 import { RelayCard } from './relay-card';
+import { RelayCardSkeleton } from './relay-card-skeleton';
 
 export default function PostRelayList() {
   const { getRelayInfo } = useRelayInfoStore();
@@ -12,7 +13,7 @@ export default function PostRelayList() {
     countActivePostRelays,
   } = usePostRelayStore();
 
-  // TODO: show paid relays
+  // TODO: Show paid relays
 
   const handleSetPostActive = (relay: any) => {
     if (countActivePostRelays() === 5) {
@@ -50,8 +51,9 @@ export default function PostRelayList() {
                 handleSetInactive={handleSetPostInactive}
               />
             ) : (
-              // TODO: Add a loading skeleton component
-              <div>Loading...</div> // Display a loading message or skeleton component
+              <div className="py-6">
+                <RelayCardSkeleton />
+              </div>
             )}
           </li>
         );

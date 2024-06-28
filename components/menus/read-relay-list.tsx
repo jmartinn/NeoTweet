@@ -3,6 +3,7 @@ import { useRelayInfoStore } from '@/app/stores/relay-info-store';
 import { useRelayStore } from '@/app/stores/relay-store';
 
 import { RelayCard } from './relay-card';
+import { RelayCardSkeleton } from './relay-card-skeleton';
 
 export default function ReadRelayList() {
   const { getRelayInfo } = useRelayInfoStore();
@@ -39,8 +40,9 @@ export default function ReadRelayList() {
                 handleSetActive={handleSetReadActive}
               />
             ) : (
-              // TODO: Add a loading skeleton component
-              <div>Loading...</div> // Display a loading message or skeleton component
+              <div className="py-6">
+                <RelayCardSkeleton />
+              </div>
             )}
           </li>
         );
