@@ -62,12 +62,12 @@ export default function RelayDiscover() {
         // console.log("Cached relay info:", cachedRelayInfo);
       }
     });
-  }, [addRelayInfo, getRelayInfo]);
+  }, [addRelayInfo, getRelayInfo, allRelays]);
 
   useEffect(() => {
     const matchingRelays: any = fuse.search(query).slice(0, 300);
     setRelaySearch(matchingRelays);
-  }, [query]);
+  }, [query, fuse]);
 
   const handleAddRelay = (postRelay: any) => {
     addPostRelay(postRelay, false);
@@ -143,8 +143,8 @@ export default function RelayDiscover() {
         {relaySearch.length > 0
           ? relaySearch.map((relay: any) => SearchItem(relay.item))
           : excludeItems(getAllRelayInfo(), [...postRelays, ...readRelays]).map(
-              (relay: any) => SearchItem(relay),
-            )}
+            (relay: any) => SearchItem(relay),
+          )}
       </ul>
     </>
   );
