@@ -36,20 +36,26 @@ export default function PostRelayList() {
       role="list"
       className="mt-4 flex-1 divide-y divide-slate-200 overflow-y-hidden dark:divide-zinc-700"
     >
-      {postRelays.map((relay) => (
-        <li key={relay.url}>
-          {getRelayInfo(relay.url) && (
-            <RelayCard
-              url={relay.url}
-              isActive={relay.isActive}
-              relayName={getRelayInfo(relay.url).name}
-              relayContact={getRelayInfo(relay.url).contact}
-              handleSetActive={handleSetPostActive}
-              handleSetInactive={handleSetPostInactive}
-            />
-          )}
-        </li>
-      ))}
+      {postRelays.map((relay) => {
+        const relayInfo = getRelayInfo(relay.url);
+        return (
+          <li key={relay.url}>
+            {relayInfo ? (
+              <RelayCard
+                url={relay.url}
+                isActive={relay.isActive}
+                relayName={relayInfo.name}
+                relayContact={relayInfo.contact}
+                handleSetActive={handleSetPostActive}
+                handleSetInactive={handleSetPostInactive}
+              />
+            ) : (
+              // TODO: Add a loading skeleton component
+              <div>Loading...</div> // Display a loading message or skeleton component
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }
