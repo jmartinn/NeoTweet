@@ -26,8 +26,8 @@ export function Article({ event }: ArticleProps): JSX.Element {
   const routeArticle = (): void => {
     const identifier = getTagValues('d', event.tags);
 
-    // TODO: handle relays
-    // TODO: add tag for applicacants
+    // TODO: Handle relays
+    // TODO: Add tag for applicacants
     const addressPointer: AddressPointer = {
       identifier,
       pubkey: event.pubkey,

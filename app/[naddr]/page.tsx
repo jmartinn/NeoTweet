@@ -102,7 +102,9 @@ export default function Blog() {
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
-                <p className="font-medium">Guillermo Rauch</p>
+                <p className="font-medium">
+                  {getProfile(relayUrl, articleEvent.pubkey)?.name}
+                </p>
                 <div className="flex items-center space-x-2">
                   <div className="flex items-center space-x-1">
                     <p className="text-muted-foreground text-sm">
