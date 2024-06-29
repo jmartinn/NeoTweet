@@ -7,18 +7,15 @@ import type { Event } from 'nostr-tools';
 
 import { useArticleEventStore } from '@/app/stores/event-store';
 import { useProfileStore } from '@/app/stores/profile-store';
-import { useRelayMenuStore } from '@/app/stores/relay-menu-store';
 import { useRelayStore } from '@/app/stores/relay-store';
 import { Profile } from '@/app/types';
 import { Article } from '@/components/article';
-import { Icons } from '@/components/icons';
+import { ArticleSkeleton } from '@/components/article-skeleton';
 import { RelaySheet } from '@/components/menus/relay-menu';
 import { Badge } from '@/components/ui/badge';
 import { getTagValues } from '@/lib/utils';
 
 export default function Home() {
-  const { setRelayMenuIsOpen } = useRelayMenuStore();
-
   const {
     getEvents: getArticleEvents,
     setEvents: setArticleEvents,
@@ -29,6 +26,7 @@ export default function Home() {
   const { setProfile } = useProfileStore();
 
   const [mounted, setMounted] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
@@ -38,7 +36,6 @@ export default function Home() {
     kinds: [30023],
     limit: 10,
     until: undefined,
-    // "#t": ["neovim"],
   };
 
   const getArticles = async () => {
@@ -89,9 +86,10 @@ export default function Home() {
         setProfile(profile);
       };
 
-      const onEOSE = () => { };
+      const onEOSE = () => {};
 
       subscribe([relayUrl], userFilter, onEvent, onEOSE);
+      setLoading(false);
     };
 
     subscribe([relayUrl], articleFilter, onEvent, onEOSE);
@@ -99,6 +97,7 @@ export default function Home() {
 
   useEffect(() => {
     if (getArticleEvents(relayUrl).length > 0) {
+      setLoading(false);
       return;
     }
     getArticles();
@@ -108,11 +107,15 @@ export default function Home() {
     <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
       {/* Articles */}
       <div className="lg:grid-area: article mt-6 flex flex-col gap-16">
-        {mounted &&
-          articleEvents[relayUrl] &&
-          articleEvents[relayUrl].map((event) => (
-            <Article key={event.id} event={event} />
-          ))}
+        {loading
+          ? Array(5)
+              .fill(0)
+              .map((_, idx) => <ArticleSkeleton key={idx} />)
+          : mounted &&
+            articleEvents[relayUrl] &&
+            articleEvents[relayUrl].map((event) => (
+              <Article key={event.id} event={event} />
+            ))}
       </div>
 
       {/* Sidebar */}
@@ -159,14 +162,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <button
-            className="relative flex items-center gap-x-2 rounded-full bg-teal-500/90 px-3 py-2 text-sm font-medium text-teal-50 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition hover:bg-teal-500 dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10"
-            onClick={() => setRelayMenuIsOpen(true)}
-          >
-            <Icons.PencilSquare className="-mr-1 ml-1 flex size-4 items-center text-teal-50" />
-            <span>write</span>
-          </button>
         </div>
       </div>
     </div>
