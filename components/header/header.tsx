@@ -31,7 +31,7 @@ export default function Header() {
             <div className="flex items-center justify-end gap-x-4 md:flex-1">
               {/* Search */}
               <div className="cursor-pointer rounded-full p-2 shadow-lg shadow-zinc-800/5 ring-2 ring-zinc-900/10 backdrop-blur hover:bg-zinc-50 dark:shadow-zinc-500/10 dark:ring-white/10 dark:hover:bg-zinc-800/90">
-                <Icons.Magnifier className="size-6 stroke-zinc-500 dark:stroke-zinc-500" />
+                <Icons.Search className="size-6 stroke-zinc-500 dark:stroke-zinc-500" />
               </div>
               <ThemeToggle theme={theme} />
               <Login>

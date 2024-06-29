@@ -76,7 +76,7 @@
   }
 
   .chunk-container::after {
-    content: "";
+    content: '';
     @apply absolute -inset-4 shadow-xl rounded-xl border;
   }
 }

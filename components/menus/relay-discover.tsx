@@ -8,6 +8,8 @@ import { useRelayInfoStore } from '@/app/stores/relay-info-store';
 import { useRelayStore } from '@/app/stores/relay-store';
 import { Icons } from '@/components/icons';
 
+import { Input } from '../ui/input';
+
 import RelayIcon from './relay-icon';
 
 const options = {
@@ -21,13 +23,12 @@ const options = {
 
 export default function RelayDiscover() {
   const { getRelayInfo, getAllRelayInfo, addRelayInfo } = useRelayInfoStore();
-
   const { postRelays, addPostRelay } = usePostRelayStore();
   const { readRelays, addReadRelay } = useReadRelayStore();
-
   const { allRelays } = useRelayStore();
+
   const [query, setQuery] = useState('');
-  const [relaySearch, setRelaySearch] = useState<any>([]);
+  const [relaySearch, setRelaySearch] = useState<any[]>([]);
 
   function excludeItems(original: any[], exclude: any[]): any[] {
     const excludeUrls = exclude.map((item) => item.url);
@@ -44,7 +45,7 @@ export default function RelayDiscover() {
       const cachedRelayInfo = getRelayInfo(relayUrl);
       const relayHttpUrl = relayUrl.replace('wss://', 'https://');
       if (cachedRelayInfo === undefined) {
-        const getRelayInfo = async (url: string) => {
+        const fetchRelayInfo = async (url: string) => {
           try {
             const response = await fetch(url, {
               headers: {
@@ -57,9 +58,7 @@ export default function RelayDiscover() {
             console.error(`Error fetching relay information: ${error}`);
           }
         };
-        getRelayInfo(relayHttpUrl);
-      } else {
-        // console.log("Cached relay info:", cachedRelayInfo);
+        fetchRelayInfo(relayHttpUrl);
       }
     });
   }, [addRelayInfo, getRelayInfo, allRelays]);
@@ -69,15 +68,15 @@ export default function RelayDiscover() {
     setRelaySearch(matchingRelays);
   }, [query, fuse]);
 
-  const handleAddRelay = (postRelay: any) => {
-    addPostRelay(postRelay, false);
-    addReadRelay(postRelay, false);
+  const handleAddRelay = (relayUrl: string) => {
+    addPostRelay(relayUrl, true);
+    addReadRelay(relayUrl, true);
   };
 
   function SearchItem(relay: any) {
     return (
       <li key={relay.url}>
-        <div className="group relative z-20 flex items-center px-5 py-6">
+        <div className="group relative z-20 flex items-center px-2 py-6">
           <div className="-m-1 block flex-1 p-1">
             <div className="absolute inset-0" aria-hidden="true" />
             <div className="relative flex min-w-0 flex-1 items-center">
@@ -89,16 +88,15 @@ export default function RelayDiscover() {
                         .replace('wss://', 'https://')
                         .replace('relay.', '') + '/favicon.ico'
                     }
-                    fallback="https://user-images.githubusercontent.com/29136904/244441447-d6f64435-6155-4ffa-8574-fb221a3ad412.png"
-                    alt=""
+                    alt={relay.name}
                   />
                 )}
               </span>
               <div className="ml-4 truncate">
-                <p className="truncate text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <p className="w-[125px] truncate text-sm font-medium text-slate-900 dark:text-zinc-100">
                   {relay.name}
                 </p>
-                <p className="truncate text-sm text-zinc-500">
+                <p className="w-[145px] truncate text-sm text-slate-500">
                   {relay.contact}
                 </p>
               </div>
@@ -114,38 +112,35 @@ export default function RelayDiscover() {
       </li>
     );
   }
-
   return (
     <>
-      <div className="mx-4">
-        <div className="relative mt-6 flex items-center ">
-          <input
-            type="search"
-            name="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            id="search"
-            placeholder="Search relays..."
-            className="block w-full rounded-md border-0 py-4 pl-4 pr-14 text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6 dark:bg-zinc-900 dark:text-zinc-100 dark:ring-zinc-700 dark:placeholder:text-zinc-400"
-          />
-          <div className="absolute inset-y-0 right-0 flex py-4 pr-4">
-            <Icons.Magnifier
-              className="size-5 text-zinc-400"
-              aria-hidden="true"
-            />
-          </div>
+      <div className="relative mt-6">
+        <Icons.Search className="text-muted-foreground absolute left-2 top-2.5 size-4" />
+        <Input
+          placeholder="Search"
+          id="search"
+          name="search"
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          className="pl-8"
+        />
+      </div>
+      <div className="">
+        <div className="mt-6 max-h-[calc(100vh-16rem)] overflow-y-auto">
+          <ul
+            role="list"
+            className="flex-1 divide-y divide-zinc-200 border-t border-zinc-200 pr-4 dark:divide-zinc-700 dark:border-zinc-700"
+          >
+            {relaySearch.length > 0
+              ? relaySearch.map((relay: any) => SearchItem(relay.item))
+              : excludeItems(getAllRelayInfo(), [
+                ...postRelays,
+                ...readRelays,
+              ]).map((relay: any) => SearchItem(relay))}{' '}
+          </ul>
         </div>
       </div>
-      <ul
-        role="list"
-        className="mt-6 flex-1 divide-y divide-zinc-200 overflow-y-auto border-t border-zinc-200 dark:divide-zinc-700 dark:border-zinc-700"
-      >
-        {relaySearch.length > 0
-          ? relaySearch.map((relay: any) => SearchItem(relay.item))
-          : excludeItems(getAllRelayInfo(), [...postRelays, ...readRelays]).map(
-            (relay: any) => SearchItem(relay),
-          )}
-      </ul>
     </>
   );
 }

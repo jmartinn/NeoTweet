@@ -1,11 +1,13 @@
+import { Icons } from '@/components/icons';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
-export default function RelayIcon({ src, fallback, alt }: any) {
+
+export default function RelayIcon({ src, alt }: any) {
   return (
-    <Avatar className="size-8">
+    <Avatar className="size-10">
       <AvatarImage src={src} alt={alt} />
       <AvatarFallback className="text-xs font-medium">
-        <AvatarImage src={fallback} alt={alt} />
+        <Icons.Satelite className="size-6" />
       </AvatarFallback>
     </Avatar>
   );

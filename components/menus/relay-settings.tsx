@@ -132,8 +132,7 @@ export default function RelaySettings() {
                           .replace('wss://', 'https://')
                           .replace('relay.', '') + '/favicon.ico'
                       }
-                      fallback="https://user-images.githubusercontent.com/29136904/244441447-d6f64435-6155-4ffa-8574-fb221a3ad412.png"
-                      alt=""
+                      alt={relay.name}
                     />
                   </span>
                   <div className="ml-4 truncate">

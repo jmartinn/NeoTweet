@@ -14,7 +14,7 @@ interface RelayCardProps extends Relay {
 
 export function RelayCard(props: RelayCardProps) {
   return (
-    <div className="group relative flex items-center px-5 py-6">
+    <div className="group relative flex items-center px-2 py-6">
       <div className="-m-1 block flex-1 p-1">
         <div className="absolute inset-0" aria-hidden="true" />
         <div className="relative flex min-w-0 flex-1 items-center">
@@ -24,15 +24,14 @@ export function RelayCard(props: RelayCardProps) {
                 props.url.replace('wss://', 'https://').replace('relay.', '') +
                 '/favicon.ico'
               }
-              fallback="https://user-images.githubusercontent.com/29136904/244441447-d6f64435-6155-4ffa-8574-fb221a3ad412.png"
-              alt=""
+              alt={props.relayName}
             />
           </span>
           <div className="ml-4 truncate">
             {props.isActive ? (
               <>
                 <p className="truncate text-sm font-medium text-slate-900 dark:text-zinc-100">
-                  <span>{props.relayName}</span>
+                  <span>{props.relayName.substring(0, 5)}</span>
                   <span className="z-20 inline-flex select-none items-center px-2 text-xs font-medium text-green-600 dark:text-green-400 dark:ring-green-500/20">
                     Active
                   </span>
@@ -43,10 +42,10 @@ export function RelayCard(props: RelayCardProps) {
               </>
             ) : (
               <>
-                <p className="truncate text-sm font-medium text-slate-900 dark:text-zinc-100">
+                <p className="w-[125px] truncate text-sm font-medium text-slate-900 dark:text-zinc-100">
                   {props.relayName}
                 </p>
-                <p className="truncate text-sm text-slate-500">
+                <p className="w-[145px] truncate text-sm text-slate-500">
                   {props.relayContact}
                 </p>
               </>
