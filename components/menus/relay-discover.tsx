@@ -70,7 +70,7 @@ export default function RelayDiscover() {
 
   const handleAddRelay = (relayUrl: string) => {
     addPostRelay(relayUrl, true);
-    addReadRelay(relayUrl, true);
+    addReadRelay(relayUrl, false);
   };
 
   function SearchItem(relay: any) {

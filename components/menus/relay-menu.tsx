@@ -23,7 +23,7 @@ export function RelaySheet() {
             Change your relay preferences here
           </SheetDescription>
         </SheetHeader>
-        <Tabs defaultValue="read-from" className="mt-8">
+        <Tabs defaultValue="discover" className="mt-8">
           <TabsList>
             <TabsTrigger value="read-from">Read From</TabsTrigger>
             <TabsTrigger value="post-to">Post To</TabsTrigger>

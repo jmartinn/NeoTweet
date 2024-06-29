@@ -20,7 +20,7 @@ export const usePostRelayStore = create<RelayState>()(
   devtools(
     persist(
       (set, get) => ({
-        postRelays: [], // Initialized empty; to be populated dynamically
+        postRelays: [{ url: 'wss://relay.damus.io', isActive: true }],
 
         addPostRelay: (url, isActive) =>
           set((state) => ({

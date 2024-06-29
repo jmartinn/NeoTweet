@@ -30,13 +30,13 @@ export function RelayCard(props: RelayCardProps) {
           <div className="ml-4 truncate">
             {props.isActive ? (
               <>
-                <p className="truncate text-sm font-medium text-slate-900 dark:text-zinc-100">
+                <p className="w-[125px] truncate text-sm font-medium text-slate-900 dark:text-zinc-100">
                   <span>{props.relayName.substring(0, 5)}</span>
                   <span className="z-20 inline-flex select-none items-center px-2 text-xs font-medium text-green-600 dark:text-green-400 dark:ring-green-500/20">
                     Active
                   </span>
                 </p>
-                <p className="truncate text-sm text-slate-500">
+                <p className="w-[145px] truncate text-sm text-slate-500">
                   {props.relayContact}
                 </p>
               </>
