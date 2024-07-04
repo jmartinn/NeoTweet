@@ -13,7 +13,7 @@ import { useRelayStore } from '@/app/stores/relay-store';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getTagValues } from '@/lib/utils';
 
-export default function Blog() {
+export default function BlogPost() {
   const { subscribe, relayUrl } = useRelayStore();
   const { getProfile } = useProfileStore();
   const {

@@ -66,7 +66,7 @@ export function Article({ event }: ArticleProps): JSX.Element {
         {' • '}
         <p className="text-muted-foreground text-sm">Damus</p>
       </div>
-      <h2 className="text-base font-semibold tracking-tight">
+      <h2 className="mt-4 text-base font-semibold tracking-tight">
         <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
         <span className="relative z-10">
           {getTagValues('title', event.tags)}

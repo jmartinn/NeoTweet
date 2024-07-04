@@ -80,6 +80,7 @@ export const useRelayStore = create<RelaysState>((set) => ({
           if (!isRelayInSet) {
             set((state) => ({
               ...state,
+              // @ts-ignore
               connectedRelays: new Set([...connectedRelays, relay]),
             }));
           }
@@ -89,6 +90,7 @@ export const useRelayStore = create<RelaysState>((set) => ({
       relay.on('disconnect', () => {
         set({
           connectedRelays: new Set(
+            // @ts-ignore
             [...connectedRelays].filter((r) => r.url !== relay.url),
           ),
         });

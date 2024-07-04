@@ -34,11 +34,12 @@ export function getTagValues(name: string, tags: string[][]) {
 }
 
 export function extractHashtags(tags: string[][]) {
-  return tags
-    .filter((tag) => tag[0] === 't')
-    .flatMap((tag) => tag[1].split(/\s+/))
-    .filter((tag) => tag.startsWith('#'))
-    .map((tag) => tag.substring(1));
+  return tags.filter((tag) => tag[0] === 't').map((tag) => tag[1]);
+  // NOTE: The following code checks whether the tag starts with '#' and removes it.
+
+  // .flatMap((tag) => tag[1].split(/\s+/))
+  // .filter((tag) => tag.startsWith('#'))
+  // .map((tag) => tag.substring(1));
 }
 
 export function uniqBy<T>(arr: T[], key: keyof T): T[] {
